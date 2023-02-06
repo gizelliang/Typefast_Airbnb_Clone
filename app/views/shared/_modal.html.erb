@@ -6,9 +6,10 @@
   aria-labelledby="modal-title"
   role="dialog"
   aria-modal="true"
+  data-action="click->modal#showModal"
 >
-
-  <div id="modal-trigger" data-action="click->modal#showModal"></div>
+<div class="hidden" id="modal-trigger" data-action="click->modal#showModal"></div>
+ 
   <!--
     Background backdrop, show/hide based on modal state.
 
