@@ -10,7 +10,6 @@ module Api
           end
         end
       rescue ActiveRecord::RecordNotFound => e
-        binding.pry
         respond_to do |format|
           format.json do
             render json: {error: e.message}.to_json, status: 404
