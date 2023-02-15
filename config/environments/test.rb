@@ -10,7 +10,7 @@ Rails.application.configure do
 
   # Turn false under Spring and add config.action_view.cache_template_loading = true.
   config.cache_classes = true
-  # This is to prevent the error caused by the sassc-rails gem when running tests
+  # This is to prevent the error caused by the sassc-rails gem when running te
   config.assets.css_compressor = nil
 
   # Eager loading loads your whole application. When running a single test locally,
