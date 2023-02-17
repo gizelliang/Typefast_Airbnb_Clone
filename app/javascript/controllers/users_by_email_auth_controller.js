@@ -2,12 +2,18 @@ import { Controller } from "@hotwired/stimulus";
 import axios from 'axios';
 
 export default class extends Controller {
-    static targets = ['email', 'submit']
+    static targets = ['email','invalidSvg','errorMessage','emailWrapper', 'submit']
     connect(){
        this.submitTarget.addEventListener('click', (e) =>{
         console.log('axios', axios);
         e.preventDefault();
         if (this.emailTarget.value.length === 0){
+            this.emailWrapperTarget.classList.add('invalid-inset-input-text-field');
+            this.emailWrapperTarget.classList.remove('focus-within:ring-1');
+            this.emailWrapperTarget.classList.remove('focus-within:ring-black');
+            this.emailWrapperTarget.classList.remove('focus-within:border-black');
+            this.invalidSvgTarget.classList.remove('hidden');
+            this.errorMessageTarget.classList.remove('hidden');
 
         } else {
             axios.get('/api/users_by_email', {
