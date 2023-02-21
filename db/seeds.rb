@@ -1,4 +1,3 @@
-
 10.times do
   Property.create!(
     name: Faker::Lorem.word,
