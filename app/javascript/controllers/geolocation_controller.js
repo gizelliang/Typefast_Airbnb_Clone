@@ -1,25 +1,28 @@
 import { Controller } from '@hotwired/stimulus';
 import { getDistance, convertDistance } from 'geolib';
+import { isEmpty } from 'lodash-es' ;
 
 export default class extends Controller {
-    static targets = ['property']
+    static targets = ['property'];
     connect() {
-        console.log(this.propertyTargets);
+      
+      if (isEmpty(this.element.dataset.latitude) && isEmpty(this.element.dataset.longitude)) {
         window.navigator.geolocation.getCurrentPosition((position) => {
-            this.element.dataset.latitude = position.coords.latitude;
-            this.element.dataset.longitude = position.coords.longitude;
-            const distance = getDistance(
-              { latitude: position.coords.latitude, longitude: position.coords.longitude},
-              { latitude: 47.620146, longitude: -100.540737 }
+          this.element.dataset.latitude = position.coords.latitude;
+          this.element.dataset.longitude = position.coords.longitude;
+  
+          this.propertyTargets.forEach((propertyTarget) => {
+            let distanceFrom = getDistance(
+              { latitude: position.coords.latitude, longitude: position.coords.longitude },
+              { latitude: propertyTarget.dataset.latitude, longitude: propertyTarget.dataset.longitude },
             );
-            console.log(convertDistance(distance, 'km'));
-            this.propertyTargets.forEach((propertyTarget) => {
-              let distanceFrom = getDistance(
-                { latitude: position.coords.latitude, longitude: position.coords.longitude},
-                { latitude: propertyTarget.dataset.latitude, longitude: propertyTarget.dataset.longitude}, 
-                ); 
-              propertyTarget.querySelector('[data-distance-away]').innerHTML = `${Math.round(convertDistance(distanceFrom, 'km'))} kilometers away` ;
-            });
+  
+            propertyTarget.querySelector('[data-distance-away]').innerHTML = `${Math.round(convertDistance(distanceFrom, 'km'))} kilometers away`;
           });
+        });
+      } else {
+
+        }
+   
   }
 }

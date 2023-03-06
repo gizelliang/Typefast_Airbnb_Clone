@@ -11,6 +11,6 @@ class Property < ApplicationRecord
     def address
       #[address_1, address_2, city, state, "US" ].compact.join(', ')
   
-      [state, "US" ].compact.join(', ')
+      [state, country].compact.join(', ')
     end
 end
