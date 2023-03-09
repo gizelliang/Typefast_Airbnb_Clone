@@ -5,6 +5,6 @@ class Review < ApplicationRecord
     belongs_to :reviewable, polymorphic: true, counter_cache: true
     after_commit :update_average_rating, on: [:create, :update]
     def update_average_rating
-        reviewable.update(average_rating:reviewable.reviewds.average(:rating))
+        reviewable.update(average_rating:reviewable.reviews.average(:rating))
     end
 end
