@@ -15,6 +15,11 @@ export default class extends Controller {
         this.setDistanceText();  
       }
     }
+    favorite() {
+      console.log('favorite button is clicked!');
+     }
+   
+ 
     setUserCoordinates(coordinates){
         this.element.dataset.latitude = coordinates.latitude;
         this.element.dataset.longitude = coordinates.longitude;
