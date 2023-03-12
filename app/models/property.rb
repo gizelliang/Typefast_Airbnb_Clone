@@ -11,6 +11,9 @@ class Property < ApplicationRecord
     geocoded_by :address
     after_validation :geocode, if: -> { latitude.blank? && longitude.blank? }
     has_many :reviews, as: :reviewable
+    has_many :favorites, dependent: :destroy
+    has_many :favorited_users, through: :favorites, source: :user
+    
     def address
       #[address_1, address_2, city, state, "US" ].compact.join(', ')
   
