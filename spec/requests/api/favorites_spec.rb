@@ -22,4 +22,13 @@ RSpec.describe "Api::Favorites", type: :request do
           expect(response.status).to eq 201
         end
       end
-  end
+      describe "Delete destroy" do
+        it "deletes a favorite" do
+          favorite = create (:favorite)
+          expect {
+          delete api_favorite_path(favorite), headers: headers
+          }.to change(Favorite, :count).by(-1)
+          expect(response.status).to eq 204
+        end
+      end
+    end

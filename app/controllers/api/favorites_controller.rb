@@ -12,6 +12,17 @@ module Api
           end
         end
       end
+      def destroy
+        favorite = Favorite.find(params[:id])
+        favorite.destroy!
+        respond_to do |format|
+          format.json do
+          render json: favorite.to_json, status: 204
+          end
+        end
+      end
+      
+      private
       def favorite_params
         params.permit(:user_id, :property_id)
       end
